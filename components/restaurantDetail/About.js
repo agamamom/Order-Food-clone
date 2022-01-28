@@ -10,14 +10,15 @@ const yelpRestaurantInfo = {
     categories: [{ title: "Thai" }, { title: "Comfort Food" }],
 };
 
-const { name, image, price, reviews, rating, categories } = yelpRestaurantInfo;
 
-const formattedCategories = categories.map((cat) => cat.title).join(" • ");
 
-const description = `${formattedCategories} ${price ? " • " + price : ""
-    } • 🎫 • ${rating} ⭐ (${reviews}+)`;
+export default function About(props) {
+    const { name, image, price, reviews, rating, categories } = props.route.params;
 
-export default function About() {
+    const formattedCategories = categories.map((cat) => cat.title).join(" • ");
+
+    const description = `${formattedCategories} ${price ? " • " + price : ""
+        } • 🎫 • ${rating} ⭐ (${reviews}+)`;
     return (
         <View>
             <RestaurantImage image={image} />
@@ -28,7 +29,7 @@ export default function About() {
 }
 
 const RestaurantImage = (props) => (
-    <Image source={{ uri: props.image }} style={{ width: "100%", height: 180, marginVertical: 25 }} />
+    <Image source={{ uri: props.image }} style={{ width: "100%", height: 180 }} />
 );
 
 const RestaurantName = (props) => (
@@ -47,7 +48,7 @@ const RestaurantName = (props) => (
 const RestaurantDescription = (props) => (
     <Text
         style={{
-            marginTop: 10,
+            // marginTop: 10,
             marginHorizontal: 15,
             fontWeight: "400",
             fontSize: 15.5,
