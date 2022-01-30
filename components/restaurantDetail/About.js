@@ -1,14 +1,6 @@
 import { View, Text, Image } from 'react-native';
 import React from 'react';
 
-const yelpRestaurantInfo = {
-    name: "Farhouse Kitchen Thai Cuisine",
-    image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    price: "$$",
-    reviews: "1500",
-    rating: 4.5,
-    categories: [{ title: "Thai" }, { title: "Comfort Food" }],
-};
 
 
 
