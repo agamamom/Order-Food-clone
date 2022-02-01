@@ -2,40 +2,8 @@ import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import React from 'react';
 import { Divider } from 'react-native-elements';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { useDispatch, useSelector } from "react-redux";
-
-const foods = [
-    {
-        title: "Lasagna",
-        description: "With butter lettuce, tomato and saice",
-        image: "https://cdn.tasteatlas.com/images/dishes/0219941488a24db3a929bd02d6ae8236.jpg",
-        price: "$13.50",
-    },
-    {
-        title: "Lasagna",
-        description: "With butter lettuce, tomato and saice",
-        image: "https://cdn.tasteatlas.com/images/dishes/0219941488a24db3a929bd02d6ae8236.jpg",
-        price: "$13.50",
-    },
-    {
-        title: "Lasagna",
-        description: "With butter lettuce, tomato and saice",
-        image: "https://cdn.tasteatlas.com/images/dishes/0219941488a24db3a929bd02d6ae8236.jpg",
-        price: "$13.50",
-    },
-    {
-        title: "Lasagna",
-        description: "With butter lettuce, tomato and saice",
-        image: "https://cdn.tasteatlas.com/images/dishes/0219941488a24db3a929bd02d6ae8236.jpg",
-        price: "$13.50",
-    },
-    {
-        title: "Lasagna",
-        description: "With butter lettuce, tomato and saice",
-        image: "https://cdn.tasteatlas.com/images/dishes/0219941488a24db3a929bd02d6ae8236.jpg",
-        price: "$13.50",
-    },
-];
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 
@@ -51,7 +19,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function MenuItems({ restaurantName }) {
+export default function MenuItems({ restaurantName, foods, hideCheckbox, marginLeft, }) {
     const dispatch = useDispatch();
 
     const selectItem = (item, checkboxValue) => dispatch({
@@ -67,18 +35,20 @@ export default function MenuItems({ restaurantName }) {
         Boolean(cartItems.find((item) => item.title === food.title));
 
     return (
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
             {foods.map((food, index) => (
                 <View key={index}>
                     <View style={styles.menuItemStyle}>
-                        <BouncyCheckbox
-                            iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
-                            fillColor="green"
-                            isChecked={isFoodInCart(food, cartItems)}
-                            onPress={(checkboxValue) => selectItem(food, checkboxValue)}
-                        />
+                        {hideCheckbox ? (<></>) : (
+                            <BouncyCheckbox
+                                iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
+                                fillColor="green"
+                                isChecked={isFoodInCart(food, cartItems)}
+                                onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+                            />
+                        )}
                         <FoodInfo food={food} />
-                        <FoodImage food={food} />
+                        <FoodImage food={food} marginLeft={marginLeft ? marginLeft : 0} />
                     </View>
                     <Divider width={0.5} orientation='vertical' style={{ marginHorizontal: 20 }} />
                 </View>
@@ -95,7 +65,7 @@ const FoodInfo = (props) => (
     </View>
 );
 
-const FoodImage = (props) => (
+const FoodImage = ({ marginLeft, ...props }) => (
     <View>
         <Image
             source={{ uri: props.food.image }}
@@ -103,7 +73,7 @@ const FoodImage = (props) => (
                 width: 100,
                 height: 100,
                 borderRadius: 8,
-                // marginLeft: marginLeft,
+                marginLeft: marginLeft,
             }}
         />
     </View>
