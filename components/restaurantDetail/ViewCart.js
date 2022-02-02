@@ -227,9 +227,9 @@ export default function ViewCart({ navigation }) {
 
     const styles = StyleSheet.create({
         modalContainer: {
-            // flex: 1,
-            // justifyContent: "flex-end",
-            // backgroundColor: "rgba(0,0,0,0.7)",
+            flex: 1,
+            justifyContent: "flex-end",
+            backgroundColor: "rgba(0,0,0,0.7)",
         },
 
         modalCheckoutContainer: {
@@ -289,7 +289,9 @@ export default function ViewCart({ navigation }) {
                                     setModalVisible(false);
                                 }}
                             >
-                                <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
+                                <Text style={{ color: "white", fontSize: 20 }}>
+                                    Checkout
+                                </Text>
                                 <Text
                                     style={{
                                         position: "absolute",
